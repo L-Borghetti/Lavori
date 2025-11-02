@@ -1,138 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anagrafica Utente con Generazione (Switch)</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
-            padding: 20px;
-        }
-        .box {
-            border: 1px solid black;
-            width: 320px;
-            padding: 15px;
-            box-sizing: border-box;
-        }
-        .output {
-            min-width: 300px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            background: #f9f9f9;
-            box-sizing: border-box;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="date"] {
-            width: 100%;
-            box-sizing: border-box;
-            margin-bottom: 8px;
-            padding: 6px;
-        }
-        input[type="button"] {
-            margin-top: 8px;
-            padding: 6px 10px;
-        }
-        h3 {
-            margin: 10px 0 5px;
-        }
-    </style>
-    <script>
-        function calcolaEta(dataNascita) {
-            const oggi = new Date();
-            const nascita = new Date(dataNascita);
-            let eta = oggi.getFullYear() - nascita.getFullYear();
-            const mese = oggi.getMonth() - nascita.getMonth();
-            if (mese < 0 || (mese === 0 && oggi.getDate() < nascita.getDate())) {
-                eta--;
-            }
-            return eta;
-        }
-
-        function calcolaGenerazione(anno) {
-            switch (true) {
-                case (anno >= 2013):
-                    return "Generazione Alpha";
-                case (anno >= 1997):
-                    return "Generazione Z";
-                case (anno >= 1981):
-                    return "Millennials";
-                case (anno >= 1965):
-                    return "Generazione X";
-                case (anno >= 1946):
-                    return "Baby Boomers";
-                case (anno >= 1928):
-                    return "Generazione Silenziosa";
-                case (anno >= 1901):
-                    return "Greatest Generation";
-                default:
-                    return "Non classificata";
-            }
-        }
-
-        function stampa() {
-            const nome = document.getElementById("demo").value;
-            const cognome = document.getElementById("demi").value;
-            const indirizzo = document.getElementById("demu").value;
-            const citta = document.getElementById("citta").value;
-            const cap = document.getElementById("cap").value;
-            const dataNascita = document.getElementById("nascita").value;
-
-            let eta = "Non disponibile";
-            let generazione = "Non classificata";
-
-            if (dataNascita) {
-                const anno = new Date(dataNascita).getFullYear();
-                eta = calcolaEta(dataNascita);
-                generazione = calcolaGenerazione(anno);
-            }
-
-            document.getElementById("output").innerHTML = `
-                <strong>Nome:</strong> ${nome}<br>
-                <strong>Cognome:</strong> ${cognome}<br>
-                <strong>Indirizzo:</strong> ${indirizzo}<br>
-                <strong>Città:</strong> ${citta}<br>
-                <strong>CAP:</strong> ${cap}<br>
-                <strong>Data di nascita:</strong> ${dataNascita}<br>
-                <strong>Età:</strong> ${eta} anni<br>
-                <strong>Generazione:</strong> ${generazione}
-            `;
-        }
-    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Scheda Studente</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="box">
-            <h3>Nome</h3>
-            <input type="text" id="demo">
-
-            <h3>Cognome</h3>
-            <input type="text" id="demi">
-
-            <h3>Indirizzo</h3>
-            <input type="text" id="demu">
-
-            <h3>Città</h3>
-            <input type="text" id="citta">
-
-            <h3>CAP</h3>
-            <input type="text" id="cap">
-
-            <h3>Data di nascita</h3>
-            <input type="date" id="nascita">
-
-            <input type="button" value="Mostra dati" onclick="stampa()">
+    <h1>Inserisci i dati dello studente</h1>
+    
+    <div class="grid">
+        <div>
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" placeholder="Es. Luca" autocomplete="given-name" />
         </div>
 
-        <div class="output" id="output">
-            <!-- Risultato generato -->
+        <div>
+            <label for="cognome">Cognome</label>
+            <input id="cognome" name="cognome" type="text" placeholder="Es. Bianchi" autocomplete="family-name" />
+        </div>
+
+        <div style="grid-column:1 / -1">
+            <label for="scuola">Istituto</label>
+            <input id="scuola" name="scuola" type="text" placeholder="Es. Liceo Galilei" />
+        </div>
+
+        <div>
+            <label for="classe">Classe</label>
+            <input id="classe" name="classe" type="text" placeholder="Es. 3B" />
+        </div>
+
+        <div>
+            <label for="dataNascita">Data di nascita</label>
+            <input id="dataNascita" name="dataNascita" type="date" />
+        </div>
+
+        <div style="grid-column:1 / -1">
+            <label for="note">Note (opzionale)</label>
+            <textarea id="note" name="note" placeholder="Eventuali osservazioni"></textarea>
         </div>
     </div>
+
+    <div class="row" style="margin-top:12px">
+        <button type="button" id="salvaBtn">Salva scheda</button>
+    </div>
+
+    <div id="outputNomDiv" class="outputDiv" aria-live="polite">
+        <div class="small">Nome: <span id="outputNom" class="label-pill">—</span></div>
+    </div>
+
+    <div id="outputCognDiv" class="outputDiv" aria-live="polite">
+        <div class="small">Cognome: <span id="outputCogn" class="label-pill">—</span></div>
+    </div>
+
+    <div id="outputScuDiv" class="outputDiv" aria-live="polite">
+        <div class="small">Istituto: <span id="outputScu" class="label-pill">—</span></div>
+    </div>
+
+    <div id="outputClaDiv" class="outputDiv" aria-live="polite">
+        <div class="small">Classe: <span id="outputCla" class="label-pill">—</span></div>
+    </div>
+
+    <div id="outputEtaDiv" class="outputDiv" aria-live="polite">
+        <div class="small">Età stimata: <span id="outputEta" class="label-pill">—</span></div>
+    </div>
+
+    <div id="outputCategDiv" class="outputDiv" aria-live="polite">
+        <div class="small">Categoria: <span id="outputCateg" class="label-pill">—</span></div>
+    </div>
+
+    <script>
+        const button = document.getElementById("salvaBtn");
+        button.addEventListener("click", () => {
+
+            const outputNom = document.getElementById("outputNom");
+            const outputCogn = document.getElementById("outputCogn");
+            const outputScu = document.getElementById("outputScu");
+            const outputCla = document.getElementById("outputCla");
+            const outputEta = document.getElementById("outputEta");
+            const outputCateg = document.getElementById("outputCateg");
+
+            const nome = document.getElementById("nome").value;
+            outputNom.innerHTML = nome;
+            const cognome = document.getElementById("cognome").value;
+            outputCogn.innerHTML = cognome;
+            const scuola = document.getElementById("scuola").value;
+            outputScu.innerHTML = scuola;
+            const classe = document.getElementById("classe").value;
+            outputCla.innerHTML = classe;
+
+            const data = document.getElementById("dataNascita").value;
+            const anno = data ? parseInt(data.slice(0,4), 10) : null;
+
+            if (anno == null || anno < 1900) {
+                outputEta.innerHTML = "—";
+                outputCateg.innerHTML = "non determinata";
+                return;
+            }
+
+            const oggi = new Date().getFullYear();
+            const eta = oggi - anno;
+            outputEta.innerHTML = eta;
+
+            if (eta < 11) {
+                outputCateg.innerHTML = "Scuola primaria";
+            } else if (eta <= 13) {
+                outputCateg.innerHTML = "Scuola secondaria di I grado";
+            } else if (eta <= 18) {
+                outputCateg.innerHTML = "Scuola secondaria di II grado";
+            } else {
+                outputCateg.innerHTML = "Università / Formazione superiore";
+            }
+        });
+    </script>
 </body>
 </html>
