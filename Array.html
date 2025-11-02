@@ -1,1 +1,65 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <title>Numeri casuali</title>
+</head>
+<body>
+  <h1>Array di numeri casuali</h1>
+  <button onclick="genera()">Genera numeri</button>
+
+  <p><b>Media:</b> <span id="media">—</span></p>
+  <p><b>Massimo:</b> <span id="massimo">—</span></p>
+  <p><b>Minimo:</b> <span id="minimo">—</span></p>
+  <p><b>Numeri > 50:</b> <span id="mag50">—</span></p>
+
+  <div id="griglia"></div>
+
+  <script>
+    function genera() {
+      let numeri = [];
+
+      // genera 100 numeri tra -100 e 100
+      for (let i = 0; i < 100; i++) {
+        let n = Math.floor(Math.random() * 201) - 100;
+        numeri.push(n);
+      }
+
+      // mostra la griglia
+      let griglia = document.getElementById("griglia");
+      griglia.innerHTML = "";
+      for (let i = 0; i < numeri.length; i++) {
+        griglia.innerHTML += numeri[i] + " ";
+      }
+
+      // calcola media, max, min
+      let somma = 0;
+      let max = numeri[0];
+      let min = numeri[0];
+
+      for (let i = 0; i < numeri.length; i++) {
+        somma += numeri[i];
+        if (numeri[i] > max) max = numeri[i];
+        if (numeri[i] < min) min = numeri[i];
+      }
+
+      let media = somma / numeri.length;
+
+      // numeri maggiori di 50
+      let maggiori50 = [];
+      for (let i = 0; i < numeri.length; i++) {
+        if (numeri[i] > 50) {
+          maggiori50.push(numeri[i]);
+        }
+      }
+
+      // mostra risultati
+      document.getElementById("media").innerHTML = media.toFixed(2);
+      document.getElementById("massimo").innerHTML = max;
+      document.getElementById("minimo").innerHTML = min;
+      document.getElementById("mag50").innerHTML = maggiori50.join(", ");
+    }
+  </script>
+</body>
+</html>
 
