@@ -17,17 +17,17 @@
 
     <div>
       <label for="cognome">Cognome</label>
-      <input id="cognome" name="cognome" type="text" placeholder="Es. Bianchi" autocomplete="family-name" />
+      <input id="cognome" name="cognome" type="text" placeholder="Es. Borghetti" autocomplete="family-name" />
     </div>
 
     <div style="grid-column:1 / -1">
       <label for="scuola">Istituto</label>
-      <input id="scuola" name="scuola" type="text" placeholder="Es. Liceo Galilei" />
+      <input id="scuola" name="scuola" type="text" placeholder="Es. Istituto statale Cannizzaro" />
     </div>
 
     <div>
       <label for="classe">Classe</label>
-      <input id="classe" name="classe" type="text" placeholder="Es. 3B" />
+      <input id="classe" name="classe" type="text" placeholder="Es. 4ai" />
     </div>
 
     <div>
@@ -119,7 +119,6 @@
       const classe = document.getElementById("classe").value;
       outputCla.innerHTML = classe;
 
-      // Calcolo età
       const data = document.getElementById("dataNascita").value;
       const anno = data ? parseInt(data.slice(0,4), 10) : null;
       if (!anno || anno < 1900) {
@@ -135,20 +134,16 @@
         else outputCateg.innerHTML = "Università / Formazione superiore";
       }
 
-      // Sesso
       const sesso = document.querySelector('input[name="sesso"]:checked');
       document.getElementById("outSesso").innerHTML = sesso ? sesso.value : "—";
 
-      // Provincia
       const prov = document.getElementById("provincia").value;
       document.getElementById("outProv").innerHTML = prov || "—";
 
-      // Mezzi
       const mezzi = document.querySelectorAll('input[name="mezzi"]:checked');
       const listaMezzi = Array.from(mezzi).map(m => m.value);
       document.getElementById("outMezzi").innerHTML = listaMezzi.length > 0 ? listaMezzi.join(", ") : "—";
 
-      // Materie (max 3)
       const materieSel = Array.from(document.getElementById("materie").selectedOptions).map(o => o.value);
       if (materieSel.length > 3) {
         alert("Puoi selezionare al massimo 3 materie!");
@@ -158,6 +153,7 @@
   </script>
 </body>
 </html>
+
 
 
 
