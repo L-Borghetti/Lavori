@@ -73,10 +73,11 @@
         <option value="Informatica">Informatica</option>
         <option value="Educazione fisica">Educazione fisica</option>
       </select>
+      <button type="button" id="materieBtn">Conferma le matierie</button>
     </div>
 
     <div style="grid-column:1 / -1">
-      <label for="note">Note (opzionale)</label>
+      <label for="note">Note (opzionale) </label>
       <textarea id="note" name="note" placeholder="Eventuali osservazioni"></textarea>
     </div>
   </div>
@@ -144,15 +145,19 @@
       const listaMezzi = Array.from(mezzi).map(m => m.value);
       document.getElementById("outMezzi").innerHTML = listaMezzi.length > 0 ? listaMezzi.join(", ") : "—";
 
-      const materieSel = Array.from(document.getElementById("materie").selectedOptions).map(o => o.value);
-      if (materieSel.length > 3) {
-        alert("Puoi selezionare al massimo 3 materie!");
-      }
-      document.getElementById("outMaterie").innerHTML = materieSel.slice(0,3).join(", ") || "—";
-    });
+const materieBtn = document.getElementById("materieBtn");
+materieBtn.addEventListener("click", () => {
+  const materieSel = Array.from(document.getElementById("materie").selectedOptions).map(o => o.value);
+  if (materieSel.length > 3) {
+    alert("Puoi selezionare al massimo 3 materie!");
+  }
+  document.getElementById("outMaterie").innerHTML = materieSel.slice(0,3).join(", ") || "—";
+});
+
   </script>
 </body>
 </html>
+
 
 
 
