@@ -1,173 +1,222 @@
 <!doctype html>
 <html lang="it">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Scheda Studente</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Inserisci i dati dello studente</h1>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <title>Anagrafica 2</title>
+        <link rel = "stylesheet" href = "style.css">
+    </head>
+    <body>
+        <h1>Inserisci anagrafica utente</h1>
+        
+        <div class="grid">
+            <div>
+                <label for="nome">Nome</label>
+                <input id="nome" name="nome" type="text" autocomplete="given-name" placeholder="Es. Luca" />
+            </div>
 
-  <div class="grid">
-    <div>
-      <label for="nome">Nome</label>
-      <input id="nome" name="nome" type="text" placeholder="Es. Luca" autocomplete="given-name" />
-    </div>
+            <div>
+                <label for="cognome">Cognome</label>
+                <input id="cognome" name="cognome" type="text" autocomplete="family-name" placeholder="Es. Borghetti" />
+            </div>
 
-    <div>
-      <label for="cognome">Cognome</label>
-      <input id="cognome" name="cognome" type="text" placeholder="Es. Borghetti" autocomplete="family-name" />
-    </div>
+            <div style="grid-column:1 / -1">
+                <label for="indirizzo">Indirizzo</label>
+                <input id="indirizzo" name="indirizzo" type="text" placeholder=" Via ..., civico" autocomplete="street-address" />
+            </div>
 
-    <div style="grid-column:1 / -1">
-      <label for="scuola">Istituto</label>
-      <input id="scuola" name="scuola" type="text" placeholder="Es. Istituto statale Cannizzaro" />
-    </div>
+            <div>
+                <label for="citta">Città</label>
+                <input id="citta" name="citta" type="text" autocomplete="address-level2" placeholder="Es. Milano" />
+            </div>
 
-    <div>
-      <label for="classe">Classe</label>
-      <input id="classe" name="classe" type="text" placeholder="Es. 4ai" />
-    </div>
+            <div>
+                <label for="cap">CAP</label>
+                <input id="cap" name="cap" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Es. 20045" />
+            </div>
 
-    <div>
-      <label for="dataNascita">Data di nascita</label>
-      <input id="dataNascita" name="dataNascita" type="date" />
-    </div>
-    <div>
-      <label>Sesso</label><br>
-      <input type="radio" name="sesso" value="Maschio"> M
-      <input type="radio" name="sesso" value="Femmina"> F
-      <input type="radio" name="sesso" value="Altro"> Altro
-    </div>
+            <div>
+                <label for="dataNascita">Data di nascita</label>
+                <input id="dataNascita" name="dataNascita" type="date" />
+            </div>
 
-    <div>
-      <label for="provincia">Provincia</label>
-      <select id="provincia" name="provincia">
-        <option value="">-- Seleziona --</option>
-        <option value="RM">Roma</option>
-        <option value="MI">Milano</option>
-        <option value="TO">Torino</option>
-        <option value="FI">Firenze</option>
-      </select>
-    </div>
-      
-    <div style="grid-column:1 / -1">
-      <label>Mezzi di trasporto in famiglia </label><br>
-      <input type="checkbox" name="mezzi" value="Auto"> Auto
-      <input type="checkbox" name="mezzi" value="Moto"> Moto
-      <input type="checkbox" name="mezzi" value="Bici"> Bici
-      <input type="checkbox" name="mezzi" value="Aereo"> Aereo
-    </div>
-      
-    <div style="grid-column:1 / -1">
-      <label for="materie">Materie preferite (max 3)</label><br>
-      <select id="materie" name="materie" multiple size="6">
-        <option value="Matematica">Matematica</option>
-        <option value="Italiano">Italiano</option>
-        <option value="Inglese">Inglese</option>
-        <option value="Storia">Storia</option>
-        <option value="Geografia">Telecomunicazioni</option>
-        <option value="Scienze">Sistemi</option>
-        <option value="Arte">Tps</option>
-        <option value="Informatica">Informatica</option>
-        <option value="Educazione fisica">Educazione fisica</option>
-      </select>
-      <button type="button" id="materieBtn">Conferma le matierie</button>
-    </div>
+            <div>
+                <legend>Sesso</legend>
+                <label><input type="radio" name="sesso" value="M"> M</label>
+                <label><input type="radio" name="sesso" value="F"> F</label>
+                <label><input type="radio" name="sesso" value="Altro"> Altro</label>
+            </div>
 
-    <div style="grid-column:1 / -1">
-      <label for="note">Note (opzionale) </label>
-      <textarea id="note" name="note" placeholder="Eventuali osservazioni"></textarea>
-    </div>
-  </div>
+            <div>
+                <label for="provincia">Provincia</label>
+                <select id="provincia" name="provincia">
+                    <option value="">-- Seleziona --</option>
+                    <option value="MI">Milano</option>
+                    <option value="RM">Roma</option>
+                    <option value="NA">Napoli</option>
+                    <option value="TO">Torino</option>
+                    <option value="PA">Palermo</option>
+                    <option value="BO">Bologna</option>
+                    <option value="FI">Firenze</option>
+                    <option value="VE">Venezia</option>
+                    <option value="GE">Genova</option>
+                </select>
+            </div>
 
-  <div class="row" style="margin-top:12px">
-    <button type="button" id="salvaBtn">Salva scheda</button>
-  </div>
+            <div style="grid-column:1 / -1">
+                <legend>Mezzi di locomozione posseduti in famiglia</legend>
+                <label><input type="checkbox" name="mezzi" value="Auto"> Auto</label>
+                <label><input type="checkbox" name="mezzi" value="Moto"> Moto</label>
+                <label><input type="checkbox" name="mezzi" value="Bici"> Bici</label>
+                <label><input type="checkbox" name="mezzi" value="Aereo"> Aereo</label>
+            </div>
 
-  <div id="outputNomDiv" class="outputDiv"><div class="small">Nome: <span id="outputNom" class="label-pill">—</span></div></div>
-  <div id="outputCognDiv" class="outputDiv"><div class="small">Cognome: <span id="outputCogn" class="label-pill">—</span></div></div>
-  <div id="outputScuDiv" class="outputDiv"><div class="small">Istituto: <span id="outputScu" class="label-pill">—</span></div></div>
-  <div id="outputClaDiv" class="outputDiv"><div class="small">Classe: <span id="outputCla" class="label-pill">—</span></div></div>
-  <div id="outputEtaDiv" class="outputDiv"><div class="small">Età stimata: <span id="outputEta" class="label-pill">—</span></div></div>
-  <div id="outputCategDiv" class="outputDiv"><div class="small">Categoria: <span id="outputCateg" class="label-pill">—</span></div></div>
+            <div style="grid-column:1 / -1">
+                <label for="materie">Materie di insegnamento preferite (max 3)</label>
+                <select id="materie" name="materie" multiple size="5">
+                    <option value="Matematica">Matematica</option>
+                    <option value="Telecomunicazioni">Telecomunicazioni</option>
+                    <option value="TPS">TPS</option>
+                    <option value="Informatica">Informatica</option>
+                    <option value="Letteratura">Letteratura</option>
+                    <option value="Storia">Storia</option>
+                    <option value="Educazione Fisica">Educazione Fisica</option>
+                    <option value="Inglese">Inglese</option>
+                    <option value="Religione">Religione</option>
+                </select>
+            </div>
 
-  <div id="outputExtra" class="outputDiv">
-    <div class="small">Sesso: <span id="outSesso" class="label-pill">—</span></div>
-    <div class="small">Provincia: <span id="outProv" class="label-pill">—</span></div>
-    <div class="small">Mezzi: <span id="outMezzi" class="label-pill">—</span></div>
-    <div class="small">Materie: <span id="outMaterie" class="label-pill">—</span></div>
-  </div>
+            <div style="grid-column:1 / -1">
+                    <label for="note">Note (opzionale)</label>
+                    <textarea id="note" name="note" placeholder="Eventuali note"></textarea>
+            </div>
+        </div>
 
-  <script>
-    const button = document.getElementById("salvaBtn");
-    button.addEventListener("click", () => {
+        <div class="row" style="margin-top:12px">
+            <button type="button" id="salvaBtn" onclick="stampa()">Salva </button>
+        </div>
 
-      const outputNom = document.getElementById("outputNom");
-      const outputCogn = document.getElementById("outputCogn");
-      const outputScu = document.getElementById("outputScu");
-      const outputCla = document.getElementById("outputCla");
-      const outputEta = document.getElementById("outputEta");
-      const outputCateg = document.getElementById("outputCateg");
-      
-const persona = {
-    nome: document.getElementById("nome").value,
-    cognome: document.getElementById("cognome").value,
-    eta:  parseInt(document.getElementById("dataNascita").value.slice(0,4), 10),
-    indirizzo: { // Una proprietà può essere a sua volta un altro oggetto letterale
-        via: 'Via Roma 1',
-        citta: 'Milano'
-    },
-    saluta: function() { // I metodi possono essere inclusi come funzioni
-        console.log('Ciao, mi chiamo ' + this.nome + ' ' + this.cognome);
-    }
-};
-      
-      const scuola = document.getElementById("scuola").value;
-      outputScu.innerHTML = scuola;
-      
-      
-      const classe = document.getElementById("classe").value;
-      outputCla.innerHTML = classe;
-      
-      
+        <div id="outputNomDiv" class="outputDiv" aria-live="polite">
+            <div class="small">Nome: <span id="outputNom" class="label-pill">—</span></div>
+        </div>
 
-      
-      
-      if (!anno || anno < 1900) {
-        outputEta.innerHTML = "—";
-        outputCateg.innerHTML = "non determinata";
-      } else {
-        const oggi = new Date().getFullYear();
-        const eta = oggi - anno;
-        outputEta.innerHTML = eta;
-        if (eta < 11) outputCateg.innerHTML = "Scuola primaria";
-        else if (eta <= 13) outputCateg.innerHTML = "Scuola secondaria di I grado";
-        else if (eta <= 18) outputCateg.innerHTML = "Scuola secondaria di II grado";
-        else outputCateg.innerHTML = "Università / Formazione superiore";
-      }
+        <div id="outputCognDiv" class="outputDiv" aria-live="polite">
+            <div class="small">Cognome: <span id="outputCogn" class="label-pill">—</span></div>
+        </div>
 
-      const sesso = document.querySelector('input[name="sesso"]:checked');
-      document.getElementById("outSesso").innerHTML = sesso ? sesso.value : "—";
+        <div id="outputIndDiv" class="outputDiv" aria-live="polite">
+            <div class="small">Indirizzo: <span id="outputInd" class="label-pill">—</span></div>
+        </div>
 
-      const prov = document.getElementById("provincia").value;
-      document.getElementById("outProv").innerHTML = prov || "—";
+        <div id="outputCitDiv" class="outputDiv" aria-live="polite">
+            <div class="small">Città: <span id="outputCit" class="label-pill">—</span></div>
+        </div>
 
-      const mezzi = document.querySelectorAll('input[name="mezzi"]:checked');
-      const listaMezzi = Array.from(mezzi).map(m => m.value);
-      document.getElementById("outMezzi").innerHTML = listaMezzi.length > 0 ? listaMezzi.join(", ") : "—";
+        <div id="outputCAPDiv" class="outputDiv" aria-live="polite">
+            <div class="small">CAP: <span id="outputCAP" class="label-pill">—</span></div>
+        </div>
 
-const materieBtn = document.getElementById("materieBtn");
-materieBtn.addEventListener("click", () => {
-  const materieSel = Array.from(document.getElementById("materie").selectedOptions).map(o => o.value);
-  if (materieSel.length > 3) {
-    alert("Puoi selezionare al massimo 3 materie!");
-  }
-  document.getElementById("outMaterie").innerHTML = materieSel.slice(0,3).join(", ") || "—";
-});
+        <div id="outputGenDiv" class="outputDiv" aria-live="polite">
+            <div class="small">Generazione: <span id="outputGen" class="label-pill">—</span></div>
+        </div>
 
-  </script>
-</body>
+        <div id="outputSDiv" class="outputDiv" aria-live="polite">
+            <div class="small">Sesso: <span id="outputSesso" class="label-pill">—</span></div>
+        </div>
+        
+        <div id="outputProvDiv" class="outputDiv" aria-live="polite">
+            <div class="small">Provincia: <span id="outputProv" class="label-pill">—</span></div>
+        </div>
+
+        <div id="outputMezziDiv" class="outputDiv" aria-live="polite">
+            <div class="small">Mezzi: <span id="outputMezzi" class="label-pill">—</span></div>
+        </div>
+
+        <div id="outputMaterieDiv" class="outputDiv" aria-live="polite">
+            <div class="small">Materie: <span id="outputMaterie" class="label-pill">—</span></div>
+        </div>
+
+        <script>
+            function stampa() {
+
+                const outputNom = document.getElementById("outputNom");
+                const outputCogn = document.getElementById("outputCogn");
+                const outputInd = document.getElementById("outputInd");
+                const outputCit = document.getElementById("outputCit");
+                const outputCAP = document.getElementById("outputCAP");
+                const outputGen = document.getElementById("outputGen");
+                const outputSesso = document.getElementById("outputSesso");
+                const outputProv = document.getElementById("outputProv");
+                const outputMezzi = document.getElementById("outputMezzi");
+                const outputMaterie = document.getElementById("outputMaterie");
+
+                const persona = {
+                    nome : document.getElementById("nome").value,
+                    cognome : document.getElementById("cognome").value,
+                    indirizzo : document.getElementById("indirizzo").value,
+                    citta : document.getElementById("citta").value,
+                    cap : document.getElementById("cap").value,
+                    anno : parseInt(document.getElementById("dataNascita").value.slice(0,4), 10),
+                    sesso : document.getElementsByName("sesso"),
+                    provincia : document.getElementById("provincia"),
+                    mezzi : document.getElementsByName("mezzi"),
+                    materie : document.getElementById("materie").options
+                };
+
+                outputNom.innerHTML = persona.nome;
+                outputCogn.innerHTML = persona.cognome;
+                outputInd.innerHTML = persona.indirizzo;
+                outputCit.innerHTML = persona.citta;
+                outputCAP.innerHTML = persona.cap;
+
+                if(persona.anno == null || persona.anno < 1901) {
+                    outputGen.innerHTML = "non determinato";
+                } else if(persona.anno <= 1927) {
+                    outputGen.innerHTML = "Greatest Generation";
+                } else if(persona.anno <= 1945) {
+                    outputGen.innerHTML = "Generazione Silenziosa";
+                } else if(persona.anno <= 1964) {
+                    outputGen.innerHTML = "Baby Boomers";
+                } else if(persona.anno <= 1980) {
+                    outputGen.innerHTML = "Generazione X";
+                } else if(persona.anno <= 1996) {
+                    outputGen.innerHTML = "Millennials";
+                } else if(persona.anno <= 2012) {
+                    outputGen.innerHTML = "Generazione Z";
+                }  else {
+                    outputGen.innerHTML = "Generazione Alpha";
+                }
+                
+                for(let i = 0; i < persona.sesso.length; i++) {
+                    if(persona.sesso[i].checked) {
+                        outputSesso.innerHTML = persona.sesso[i].value;
+                    }
+                }
+                
+                outputProv.innerHTML = persona.provincia.options[persona.provincia.selectedIndex].text;
+
+                let selezionati = [];
+                for (let i = 0; i < persona.mezzi.length; i++) {
+                  if (persona.mezzi[i].checked) {
+                      selezionati.push(persona.mezzi[i].value);
+                    }
+                }
+                if(selezionati.length == 0) {
+                    outputMezzi.innerHTML = "Nessuno";
+                } else{
+                    outputMezzi.innerHTML = selezionati;
+                }
+
+                let selezione = []
+                for(let i = 0; i < persona.materie.length; i++) {
+                    if(persona.materie[i].selected) {
+                        selezione.push(persona.materie[i].value);
+                    }
+                    if(selezione.length == 3) {break;}
+                }
+                outputMaterie.innerHTML = selezione;
+            }
+        </script>
+    </body>
+
 </html>
-
