@@ -36,11 +36,27 @@
   <option value="Torino">Torino</option>
   <option value="Roma">Roma</option>
 </select>
+<div>
+  <label for="provincia">Provincia</label>
+  <select id="provincia" name="provincia">
+      <option value="">-- Seleziona --</option>
+      <option value="MI">Milano</option>
+      <option value="RM">Roma</option>
+      <option value="NA">Napoli</option>
+      <option value="TO">Torino</option>
+      <option value="PA">Palermo</option>
+      <option value="BO">Bologna</option>
+      <option value="FI">Firenze</option>
+      <option value="VE">Venezia</option>
+      <option value="GE">Genova</option>
+    </select>
+  </div>
 
 <p>Mezzi in famiglia:</p>
 <input type="checkbox" name="mezzi" value="Auto"> Auto
 <input type="checkbox" name="mezzi" value="Moto"> Moto
 <input type="checkbox" name="mezzi" value="Bici"> Bici
+<input type="checkbox" name="mezzi" value="Aereo"> Aereo
 
 <p>Materie preferite (max 3):</p>
 <select id="materie" multiple size="6">
@@ -48,8 +64,12 @@
   <option value="Matematica">Matematica</option>
   <option value="Inglese">Inglese</option>
   <option value="Storia">Storia</option>
-  <option value="Scienze">Scienze</option>
+  <option value="TPS">Scienze</option>
   <option value="Informatica">Informatica</option>
+  <option value="Telecomunicazioni">Informatica</option>
+  <option value="Sistemi">Sistemi</option>
+  <option value="Religione">Religione</option>
+  <option value="Educazione Fisica">Educazione Fisica</option>
 </select>
 
 <br><br>
@@ -139,6 +159,7 @@ function salva() {
 
 </body>
 </html>
+
 
 
 
