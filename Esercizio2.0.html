@@ -34,6 +34,7 @@
   <option value="Roma">Roma</option>
   <option value="Milano">Milano</option>
   <option value="Torino">Torino</option>
+  <option value="Roma">Roma</option>
 </select>
 
 <p>Mezzi in famiglia:</p>
@@ -83,8 +84,6 @@ function confermaMaterie() {
     "Materie scelte: " + primeTre.join(", ");
 }
 
-
-
 function salva() {
 
   var nome = document.getElementById("nome").value;
@@ -131,7 +130,7 @@ function salva() {
   testo += "Sesso: " + sesso + "<br>";
   testo += "Provincia: " + provincia + "<br>";
   testo += "Mezzi: " + mezziScelti.join(", ") + "<br>";
-  testo += materie; // già in formato "Materie scelte: ..."
+  testo += materie;
 
   document.getElementById("risultato").innerHTML = testo;
 }
@@ -140,6 +139,7 @@ function salva() {
 
 </body>
 </html>
+
 
 
 
