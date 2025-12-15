@@ -8,22 +8,22 @@
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
-
+// Cerchio centrato
 ctx.beginPath();
 ctx.arc(150, 150, 120, 0, 2 * Math.PI);
 ctx.stroke();
 
-
+// Stella a 5 punte centrata
 ctx.beginPath();
-ctx.moveTo(150, 40);
+ctx.moveTo(150, 50);
 ctx.lineTo(180, 120);
-ctx.lineTo(260, 120);
-ctx.lineTo(200, 170);
-ctx.lineTo(220, 250);
-ctx.lineTo(150, 200);
-ctx.lineTo(80, 250);
-ctx.lineTo(100, 170);
-ctx.lineTo(40, 120);
+ctx.lineTo(250, 120);
+ctx.lineTo(195, 165);
+ctx.lineTo(215, 240);
+ctx.lineTo(150, 195);
+ctx.lineTo(85, 240);
+ctx.lineTo(105, 165);
+ctx.lineTo(50, 120);
 ctx.lineTo(120, 120);
 ctx.closePath();
 ctx.stroke();
