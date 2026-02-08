@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabella Persone</title>
+</head>
+<body>
+
+<h2>Elenco Persone Salvate</h2>
+
+<table id="tabella1" border="1">
+</table>
+
+<script>
+
+var s = "";
+
+var url = document.location.search.substring(1);
+
+var parte1 = url.split("&")[0];
+
+var indice = parte1.substr(4);
+
+var controllo = /^[0-9]{2}$/;
+
+if (!controllo.test(indice)) {
+    alert("Indice non corretto");
+}
+
+var persone = JSON.parse(localStorage.getItem("persone"));
+
+s = s + "<tr>";
+s = s + "<th>Indice</th>";
+s = s + "<th>Nome</th>";
+s = s + "<th>Cognome</th>";
+s = s + "<th>Indirizzo</th>";
+s = s + "<th>Città</th>";
+s = s + "<th>CAP</th>";
+s = s + "</tr>";
+
+for (var i = 0; i < persone.length; i++) {
+
+    var ind = (i + 1).toString();
+
+    if (ind.length == 1) {
+        ind = "0" + ind;
+    }
+
+    s = s + "<tr>";
+    s = s + "<td>" + ind + "</td>";
+    s = s + "<td>" + persone[i].nome + "</td>";
+    s = s + "<td>" + persone[i].cognome + "</td>";
+    s = s + "<td>" + persone[i].indirizzo + "</td>";
+    s = s + "<td>" + persone[i].citta + "</td>";
+    s = s + "<td>" + persone[i].cap + "</td>";
+    s = s + "</tr>";
+}
+
+document.getElementById("tabella1").innerHTML = s;
+
+</script>
+
+</body>
+</html>
