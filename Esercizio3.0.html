@@ -137,85 +137,59 @@
         </div>
 
         <script>
-            function stampa() {
+            <script>
+function stampa() {
+    
+    var lettere = /^[A-Za-z]+$/;
+    var numeri = /^[0-9]{5}$/;
 
-                const outputNom = document.getElementById("outputNom");
-                const outputCogn = document.getElementById("outputCogn");
-                const outputInd = document.getElementById("outputInd");
-                const outputCit = document.getElementById("outputCit");
-                const outputCAP = document.getElementById("outputCAP");
-                const outputGen = document.getElementById("outputGen");
-                const outputSesso = document.getElementById("outputSesso");
-                const outputProv = document.getElementById("outputProv");
-                const outputMezzi = document.getElementById("outputMezzi");
-                const outputMaterie = document.getElementById("outputMaterie");
+    var nome = document.getElementById("nome").value;
+    var cognome = document.getElementById("cognome").value;
+    var cap = document.getElementById("cap").value;
+    
+    if (!lettere.test(nome)) {
+        alert("Nome non valido");
+        return;
+    }
 
-                const persona = {
-                    nome : document.getElementById("nome").value,
-                    cognome : document.getElementById("cognome").value,
-                    indirizzo : document.getElementById("indirizzo").value,
-                    citta : document.getElementById("citta").value,
-                    cap : document.getElementById("cap").value,
-                    anno : parseInt(document.getElementById("dataNascita").value.slice(0,4), 10),
-                    sesso : document.getElementsByName("sesso"),
-                    provincia : document.getElementById("provincia"),
-                    mezzi : document.getElementsByName("mezzi"),
-                    materie : document.getElementById("materie").options
-                };
+    if (!lettere.test(cognome)) {
+        alert("Cognome non valido");
+        return;
+    }
 
-                outputNom.innerHTML = persona.nome;
-                outputCogn.innerHTML = persona.cognome;
-                outputInd.innerHTML = persona.indirizzo;
-                outputCit.innerHTML = persona.citta;
-                outputCAP.innerHTML = persona.cap;
+    if (!numeri.test(cap)) {
+        alert("CAP deve avere 5 numeri");
+        return;
+    }
 
-                if(persona.anno == null || persona.anno < 1901) {
-                    outputGen.innerHTML = "non determinato";
-                } else if(persona.anno <= 1927) {
-                    outputGen.innerHTML = "Greatest Generation";
-                } else if(persona.anno <= 1945) {
-                    outputGen.innerHTML = "Generazione Silenziosa";
-                } else if(persona.anno <= 1964) {
-                    outputGen.innerHTML = "Baby Boomers";
-                } else if(persona.anno <= 1980) {
-                    outputGen.innerHTML = "Generazione X";
-                } else if(persona.anno <= 1996) {
-                    outputGen.innerHTML = "Millennials";
-                } else if(persona.anno <= 2012) {
-                    outputGen.innerHTML = "Generazione Z";
-                }  else {
-                    outputGen.innerHTML = "Generazione Alpha";
-                }
-                
-                for(let i = 0; i < persona.sesso.length; i++) {
-                    if(persona.sesso[i].checked) {
-                        outputSesso.innerHTML = persona.sesso[i].value;
-                    }
-                }
-                
-                outputProv.innerHTML = persona.provincia.options[persona.provincia.selectedIndex].text;
+    var persona = {
+        nome: nome,
+        cognome: cognome,
+        indirizzo: document.getElementById("indirizzo").value,
+        citta: document.getElementById("citta").value,
+        cap: cap
+    };
 
-                let selezionati = [];
-                for (let i = 0; i < persona.mezzi.length; i++) {
-                  if (persona.mezzi[i].checked) {
-                      selezionati.push(persona.mezzi[i].value);
-                    }
-                }
-                if(selezionati.length == 0) {
-                    outputMezzi.innerHTML = "Nessuno";
-                } else{
-                    outputMezzi.innerHTML = selezionati;
-                }
+    var persone = JSON.parse(localStorage.getItem("persone"));
 
-                let selezione = []
-                for(let i = 0; i < persona.materie.length; i++) {
-                    if(persona.materie[i].selected) {
-                        selezione.push(persona.materie[i].value);
-                    }
-                    if(selezione.length == 3) {break;}
-                }
-                outputMaterie.innerHTML = selezione;
-            }
+    if (persone == null) {
+        persone = [];
+    }
+
+    persone.push(persona);
+
+    localStorage.setItem("persone", JSON.stringify(persone));
+
+    var indice = persone.length.toString();
+
+    if (indice.length == 1) {
+        indice = "0" + indice;
+    }
+
+    window.location.href = "tabella.html?ind=" + indice;
+}
+</script>
+
         </script>
     </body>
 
