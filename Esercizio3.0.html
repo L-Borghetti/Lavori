@@ -116,10 +116,6 @@
             <div class="small">CAP: <span id="outputCAP" class="label-pill">—</span></div>
         </div>
 
-        <div id="outputGenDiv" class="outputDiv" aria-live="polite">
-            <div class="small">Generazione: <span id="outputGen" class="label-pill">—</span></div>
-        </div>
-
         <div id="outputSDiv" class="outputDiv" aria-live="polite">
             <div class="small">Sesso: <span id="outputSesso" class="label-pill">—</span></div>
         </div>
@@ -147,6 +143,9 @@ function stampa() {
     var indirizzo = document.getElementById("indirizzo").value;
     var citta = document.getElementById("citta").value;
     var cap = document.getElementById("cap").value;
+    var dataNascita = document.getElementById("dataNascita").value;
+    var sesso = document.getElementById("sesso").value;
+    var provincia = document.getElementById("provincia").value;
 
     if (!lettere.test(nome)) {
         alert("Il nome non è valido");
@@ -168,6 +167,10 @@ function stampa() {
     document.getElementById("outputInd").textContent = indirizzo;
     document.getElementById("outputCit").textContent = citta;
     document.getElementById("outputCAP").textContent = cap;
+    document.getElementById("outputProv").textContent = provincia;
+    document.getElementById("outputSesso").textContent = sesso;
+    document.getElementById("outputDiv").textContent = mezzi;
+    document.getElementById("outputMaterie").textContent = materie;
 }
 </script>
 
