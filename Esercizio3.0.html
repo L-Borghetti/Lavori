@@ -138,16 +138,14 @@
 
         <script>
 function stampa() {
-
+    
     var lettere = /^[A-Za-z]+$/;
     var numeri = /^[0-9]{5}$/;
 
     var nome = document.getElementById("nome").value;
     var cognome = document.getElementById("cognome").value;
-    var indirizzo = document.getElementById("indirizzo").value;
-    var citta = document.getElementById("citta").value;
     var cap = document.getElementById("cap").value;
-
+    
     if (!lettere.test(nome)) {
         alert("Il nome non è valido");
         return;
@@ -163,14 +161,33 @@ function stampa() {
         return;
     }
 
-    document.getElementById("outputNom").textContent = nome;
-    document.getElementById("outputCogn").textContent = cognome;
-    document.getElementById("outputInd").textContent = indirizzo;
-    document.getElementById("outputCit").textContent = citta;
-    document.getElementById("outputCAP").textContent = cap;
-}
-</script>
+    var persona = {
+        nome: nome,
+        cognome: cognome,
+        indirizzo: document.getElementById("indirizzo").value,
+        citta: document.getElementById("citta").value,
+        cap: cap
+    };
 
+    var persone = JSON.parse(localStorage.getItem("persone"));
+
+    if (persone == null) {
+        persone = [];
+    }
+
+    persone.push(persona);
+
+    localStorage.setItem("persone", JSON.stringify(persone));
+
+    var indice = persone.length.toString();
+
+    if (indice.length == 1) {
+        indice = "0" + indice;
+    }
+
+    window.location.href = "tabella.html?ind=" + indice;
+}
+        </script>
     </body>
 
 </html>
