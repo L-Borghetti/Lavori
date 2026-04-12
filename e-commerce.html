@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="utf-8"/>
+    <title>MarketPlace</title>
+</head>
+<body>
+
+<h1>MarketPlace — Compra e Vendi</h1>
+
+<div class="tabs">
+    <button class="attivo" onclick="cambiaScheda('catalogo', this)">Catalogo</button>
+    <button onclick="cambiaScheda('anagrafica', this)">Anagrafica</button>
+    <button onclick="cambiaScheda('carrello', this)">Carrello (<span id="num-carrello">0</span>)</button>
+</div>
+
+<div id="msg"></div>
+
+<!-- ========== CATALOGO ========== -->
+<div class="scheda attiva" id="catalogo">
+
+    <h2>Carica file CSV</h2>
+    <input type="file" id="fileCSV" accept=".csv" onchange="caricaCSV(this)">
+
+    <br><br>
+
+    <div id="barra-filtri" style="display:none; margin-bottom:10px">
+        Filtra: <span id="bottoni-filtri"></span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Categoria</th>
+                <th>Nome</th>
+                <th>Prezzo €</th>
+                <th>Dettagli</th>
+                <th>Carrello</th>
+            </tr>
+        </thead>
+        <tbody id="tabella-prodotti">
+            <tr><td colspan="6">Carica un file CSV per vedere i prodotti.</td></tr>
+        </tbody>
+    </table>
+
+    <div id="pannello-dettaglio">
+        <h3 id="det-nome"></h3>
+        <div id="det-campi"></div>
+        <p><b>Prezzo: € <span id="det-prezzo"></span></b></p>
+    </div>
+
+</div>
+
+<!-- ========== ANAGRAFICA ========== -->
+<div class="scheda" id="anagrafica">
+
+    <h2>Inserisci anagrafica utente</h2>
+
+    <div class="grid">
+        <div>
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" placeholder="Esempio: Luca">
+        </div>
+        <div>
+            <label for="cognome">Cognome</label>
+            <input id="cognome" type="text" placeholder="Esempio: Borghetti">
+        </div>
+
+        <div style="grid-column: 1 / -1">
+            <label for="indirizzo">Indirizzo</label>
+            <input id="indirizzo" type="text" placeholder="Via ..., civico">
+        </div>
+
+        <div>
+            <label for="citta">Città</label>
+            <input id="citta" type="text" placeholder="Esempio: Milano">
+        </div>
+        <div>
+            <label for="cap">CAP</label>
+            <input id="cap" type="text" placeholder="Esempio: 20045">
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="mario@email.com">
+        </div>
+        <div>
+            <label for="telefono">Telefono</label>
+            <input id="telefono" type="tel" placeholder="+39 333 000 0000">
+        </div>
+
+        <div>
+            <label for="dataNascita">Data di nascita</label>
+            <input id="dataNascita" type="date">
+        </div>
+        <div>
+            <legend>Sesso</legend>
+            <label><input type="radio" name="sesso" value="M"> M</label>
+            <label><input type="radio" name="sesso" value="F"> F</label>
+            <label><input type="radio" name="sesso" value="Altro"> Altro</label>
+        </div>
+
+        <div>
+            <label for="provincia">Provincia</label>
+            <select id="provincia">
+                <option value="">-- Seleziona --</option>
+                <option value="MI">Milano</option>
+                <option value="RM">Roma</option>
+                <option value="NA">Napoli</option>
+                <option value="TO">Torino</option>
+                <option value="PA">Palermo</option>
+                <option value="BO">Bologna</option>
+                <option value="FI">Firenze</option>
+                <option value="VE">Venezia</option>
+                <option value="GE">Genova</option>
+            </select>
+        </div>
+        <div>
+            <label for="pagamento">Metodo di pagamento</label>
+            <select id="pagamento">
+                <option value="Carta di credito">Carta di credito</option>
+                <option value="PayPal">PayPal</option>
+                <option value="Bonifico">Bonifico bancario</option>
+                <option value="Contrassegno">Contrassegno</option>
+            </select>
+        </div>
+
+        <div style="grid-column: 1 / -1">
+            <legend>Mezzi di locomozione posseduti</legend>
+            <label><input type="checkbox" name="mezzi" value="Auto"> Auto</label>
+            <label><input type="checkbox" name="mezzi" value="Moto"> Moto</label>
+            <label><input type="checkbox" name="mezzi" value="Bici"> Bici</label>
+            <label><input type="checkbox" name="mezzi" value="Monopattino"> Monopattino</label>
+        </div>
+
+        <div style="grid-column: 1 / -1">
+            <label for="note">Note (opzionale)</label>
+            <textarea id="note" placeholder="Eventuali note"></textarea>
+        </div>
+    </div>
+
+    <div style="display:flex; gap:8px">
+        <button type="button" onclick="salva()">Salva</button>
+        <button type="button" onclick="annulla()">Annulla</button>
+    </div>
+
+    <div id="outputNomDiv"   class="outputDiv" style="display:none"><div>Nome: <span id="outputNom" class="label-pill">—</span></div></div>
+    <div id="outputCognDiv"  class="outputDiv" style="display:none"><div>Cognome: <span id="outputCogn" class="label-pill">—</span></div></div>
+    <div id="outputIndDiv"   class="outputDiv" style="display:none"><div>Indirizzo: <span id="outputInd" class="label-pill">—</span></div></div>
+    <div id="outputCitDiv"   class="outputDiv" style="display:none"><div>Città: <span id="outputCit" class="label-pill">—</span></div></div>
+    <div id="outputCAPDiv"   class="outputDiv" style="display:none"><div>CAP: <span id="outputCAP" class="label-pill">—</span></div></div>
+    <div id="outputEmailDiv" class="outputDiv" style="display:none"><div>Email: <span id="outputEmail" class="label-pill">—</span></div></div>
+    <div id="outputSessoDiv" class="outputDiv" style="display:none"><div>Sesso: <span id="outputSesso" class="label-pill">—</span></div></div>
+    <div id="outputProvDiv"  class="outputDiv" style="display:none"><div>Provincia: <span id="outputProv" class="label-pill">—</span></div></div>
+    <div id="outputPagDiv"   class="outputDiv" style="display:none"><div>Pagamento: <span id="outputPag" class="label-pill">—</span></div></div>
+    <div id="outputMezziDiv" class="outputDiv" style="display:none"><div>Mezzi: <span id="outputMezzi" class="label-pill">—</span></div></div>
+
+</div>
+
+<!-- ========== CARRELLO ========== -->
+<div class="scheda" id="carrello">
+
+    <h2>Carrello</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Categoria</th>
+                <th>Nome</th>
+                <th>Prezzo €</th>
+                <th>Rimuovi</th>
+            </tr>
+        </thead>
+        <tbody id="tabella-carrello">
+            <tr><td colspan="5">Il carrello è vuoto.</td></tr>
+        </tbody>
+    </table>
+
+    <p><b>Totale: € <span id="totale">0.00</span></b></p>
+
+    <button type="button" onclick="checkout()">Conferma ordine e scarica PDF</button>
+
+    <div id="riepilogo-ordine" style="display:none; margin-top:16px">
+        <h2>Ordine confermato!</h2>
+        <div id="dati-ordine"></div>
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+
+    var prodotti = [];
+    var carrello = [];
+    var utente = null;
+
+    // cambia scheda
+    function cambiaScheda(id, btn) {
+        document.querySelectorAll('.scheda').forEach(function(s) { s.classList.remove('attiva'); });
+        document.getElementById(id).classList.add('attiva');
+        document.querySelectorAll('.tabs button').forEach(function(b) { b.classList.remove('attivo'); });
+        btn.classList.add('attivo');
+        document.getElementById('msg').style.display = 'none';
+    }
+
+    // mostra messaggio temporaneo
+    function mostraMsg(testo) {
+        var el = document.getElementById('msg');
+        el.textContent = testo;
+        el.style.display = 'block';
+        setTimeout(function() { el.style.display = 'none'; }, 3000);
+    }
+
+    // legge il CSV
+    function caricaCSV(input) {
+        var file = input.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var righe = e.target.result.trim().split('\n');
+            var intestazione = righe[0].split(',');
+            prodotti = [];
+            for (var i = 1; i < righe.length; i++) {
+                var valori = righe[i].split(',');
+                var obj = {};
+                for (var j = 0; j < intestazione.length; j++) {
+                    obj[intestazione[j].trim()] = (valori[j] || '').trim();
+                }
+                if (obj['nome']) prodotti.push(obj);
+            }
+            mostraMsg('Caricati ' + prodotti.length + ' prodotti!');
+            mostraFiltri();
+            mostraProdotti(prodotti);
+        };
+        reader.readAsText(file, 'UTF-8');
+    }
+
+    // crea i pulsanti filtro
+    function mostraFiltri() {
+        var categorie = [];
+        for (var i = 0; i < prodotti.length; i++) {
+            if (categorie.indexOf(prodotti[i]['categoria']) === -1) {
+                categorie.push(prodotti[i]['categoria']);
+            }
+        }
+        var html = '<button onclick="mostraProdotti(prodotti, this)">Tutti</button> ';
+        for (var i = 0; i < categorie.length; i++) {
+            html += '<button onclick="filtra(\'' + categorie[i] + '\', this)">' + categorie[i] + '</button> ';
+        }
+        document.getElementById('bottoni-filtri').innerHTML = html;
+        document.getElementById('barra-filtri').style.display = 'block';
+    }
+
+    function filtra(cat, btn) {
+        var filtrati = [];
+        for (var i = 0; i < prodotti.length; i++) {
+            if (prodotti[i]['categoria'] === cat) filtrati.push(prodotti[i]);
+        }
+        mostraProdotti(filtrati);
+        document.getElementById('pannello-dettaglio').style.display = 'none';
+    }
+
+    // riempie la tabella prodotti
+    function mostraProdotti(lista) {
+        var tbody = document.getElementById('tabella-prodotti');
+        var html = '';
+        for (var i = 0; i < lista.length; i++) {
+            var p = lista[i];
+            var idx = prodotti.indexOf(p);
+            var prezzo = parseFloat(p['prezzo']).toFixed(2);
+            html += '<tr>';
+            html += '<td>' + (i+1) + '</td>';
+            html += '<td>' + p['categoria'] + '</td>';
+            html += '<td>' + p['nome'] + '</td>';
+            html += '<td>' + prezzo + '</td>';
+            html += '<td><button onclick="mostraDettaglio(' + idx + ')">Dettagli</button></td>';
+            html += '<td><button id="btn-' + idx + '" onclick="aggiungiAlCarrello(' + idx + ')">Aggiungi</button></td>';
+            html += '</tr>';
+        }
+        tbody.innerHTML = html || '<tr><td colspan="6">Nessun prodotto trovato.</td></tr>';
+    }
+
+    // mostra il pannello con i dettagli del prodotto
+    function mostraDettaglio(idx) {
+        var p = prodotti[idx];
+        document.getElementById('det-nome').textContent = p['nome'] + ' — ' + p['categoria'];
+        document.getElementById('det-prezzo').textContent = parseFloat(p['prezzo']).toFixed(2);
+        var html = '';
+        for (var n = 1; n <= 5; n++) {
+            var nomeC = p['campo' + n + '_nome'];
+            var valC  = p['campo' + n + '_valore'];
+            if (nomeC && valC) {
+                html += '<p><b>' + nomeC + ':</b> ' + valC + '</p>';
+            }
+        }
+        document.getElementById('det-campi').innerHTML = html;
+        document.getElementById('pannello-dettaglio').style.display = 'block';
+    }
+
+    // aggiunge al carrello
+    function aggiungiAlCarrello(idx) {
+        if (!utente) {
+            alert('Devi prima compilare e salvare l\'anagrafica!');
+            cambiaScheda('anagrafica', document.querySelectorAll('.tabs button')[1]);
+            return;
+        }
+        var p = prodotti[idx];
+        carrello.push({ prodotto: p, id: Date.now() });
+        document.getElementById('num-carrello').textContent = carrello.length;
+        var btn = document.getElementById('btn-' + idx);
+        if (btn) btn.textContent = 'Aggiunto ✓';
+        mostraMsg('"' + p['nome'] + '" aggiunto al carrello!');
+        aggiornaCarrello();
+    }
+
+    // rimuove dal carrello
+    function rimuovi(id) {
+        for (var i = 0; i < carrello.length; i++) {
+            if (carrello[i].id === id) { carrello.splice(i, 1); break; }
+        }
+        document.getElementById('num-carrello').textContent = carrello.length;
+        aggiornaCarrello();
+    }
+
+    // aggiorna la tabella carrello
+    function aggiornaCarrello() {
+        var tbody = document.getElementById('tabella-carrello');
+        var totale = 0;
+        var html = '';
+        for (var i = 0; i < carrello.length; i++) {
+            var item = carrello[i];
+            var prezzo = parseFloat(item.prodotto['prezzo']) || 0;
+            totale += prezzo;
+            html += '<tr>';
+            html += '<td>' + (i+1) + '</td>';
+            html += '<td>' + item.prodotto['categoria'] + '</td>';
+            html += '<td>' + item.prodotto['nome'] + '</td>';
+            html += '<td>' + prezzo.toFixed(2) + '</td>';
+            html += '<td><button onclick="rimuovi(' + item.id + ')">Rimuovi</button></td>';
+            html += '</tr>';
+        }
+        tbody.innerHTML = html || '<tr><td colspan="5">Il carrello è vuoto.</td></tr>';
+        document.getElementById('totale').textContent = totale.toFixed(2);
+    }
+
+    // salva l'anagrafica
+    function salva() {
+        var lettere = /^[A-Za-zÀ-ù\s]+$/;
+        var numeri  = /^[0-9]{5}$/;
+
+        var nome     = document.getElementById('nome').value.trim();
+        var cognome  = document.getElementById('cognome').value.trim();
+        var indirizzo= document.getElementById('indirizzo').value.trim();
+        var citta    = document.getElementById('citta').value.trim();
+        var cap      = document.getElementById('cap').value.trim();
+        var email    = document.getElementById('email').value.trim();
+        var provincia= document.getElementById('provincia').value;
+        var pagamento= document.getElementById('pagamento').value;
+
+        var sessoEl = document.querySelector('input[name="sesso"]:checked');
+        var sesso = sessoEl ? sessoEl.value : '';
+
+        var mezziEl = document.querySelectorAll('input[name="mezzi"]:checked');
+        var mezzi = [];
+        for (var i = 0; i < mezziEl.length; i++) mezzi.push(mezziEl[i].value);
+
+        if (!lettere.test(nome))    { alert('Il nome non è valido'); return; }
+        if (!lettere.test(cognome)) { alert('Il cognome non è valido'); return; }
+        if (!numeri.test(cap))      { alert('Il CAP deve essere di 5 cifre'); return; }
+        if (!email.includes('@'))   { alert('Email non valida'); return; }
+
+        utente = { nome, cognome, indirizzo, citta, cap, email, sesso, provincia, pagamento, mezzi: mezzi.join(', ') };
+
+        document.getElementById('outputNom').textContent   = nome;      document.getElementById('outputNomDiv').style.display   = 'block';
+        document.getElementById('outputCogn').textContent  = cognome;   document.getElementById('outputCognDiv').style.display  = 'block';
+        document.getElementById('outputInd').textContent   = indirizzo; document.getElementById('outputIndDiv').style.display   = 'block';
+        document.getElementById('outputCit').textContent   = citta;     document.getElementById('outputCitDiv').style.display   = 'block';
+        document.getElementById('outputCAP').textContent   = cap;       document.getElementById('outputCAPDiv').style.display   = 'block';
+        document.getElementById('outputEmail').textContent = email;     document.getElementById('outputEmailDiv').style.display = 'block';
+        document.getElementById('outputSesso').textContent = sesso;     document.getElementById('outputSessoDiv').style.display = 'block';
+        document.getElementById('outputProv').textContent  = provincia; document.getElementById('outputProvDiv').style.display  = 'block';
+        document.getElementById('outputPag').textContent   = pagamento; document.getElementById('outputPagDiv').style.display   = 'block';
+        document.getElementById('outputMezzi').textContent = mezzi.join(', ') || '—'; document.getElementById('outputMezziDiv').style.display = 'block';
+
+        mostraMsg('Anagrafica salvata!');
+    }
+
+    // annulla e resetta il form
+    function annulla() {
+        document.getElementById('nome').value = '';
+        document.getElementById('cognome').value = '';
+        document.getElementById('indirizzo').value = '';
+        document.getElementById('citta').value = '';
+        document.getElementById('cap').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('telefono').value = '';
+        document.getElementById('dataNascita').value = '';
+        document.getElementById('provincia').value = '';
+        document.getElementById('note').value = '';
+        document.querySelectorAll('input[name="sesso"]').forEach(function(r) { r.checked = false; });
+        document.querySelectorAll('input[name="mezzi"]').forEach(function(c) { c.checked = false; });
+        var ids = ['outputNomDiv','outputCognDiv','outputIndDiv','outputCitDiv','outputCAPDiv','outputEmailDiv','outputSessoDiv','outputProvDiv','outputPagDiv','outputMezziDiv'];
+        for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).style.display = 'none';
+        utente = null;
+    }
+
+    // conferma ordine e genera PDF
+    function checkout() {
+        if (!utente) {
+            alert('Devi prima compilare l\'anagrafica!');
+            return;
+        }
+        if (carrello.length === 0) {
+            alert('Il carrello è vuoto!');
+            return;
+        }
+
+        generaPDF();
+
+        var totale = 0;
+        for (var i = 0; i < carrello.length; i++) totale += parseFloat(carrello[i].prodotto['prezzo']) || 0;
+        var numOrdine = 'MP-' + Date.now().toString().slice(-6);
+
+        var html = '';
+        html += '<div class="outputDiv"><div>Ordine n°: <span class="label-pill">' + numOrdine + '</span></div></div>';
+        html += '<div class="outputDiv"><div>Cliente: <span class="label-pill">' + utente.nome + ' ' + utente.cognome + '</span></div></div>';
+        html += '<div class="outputDiv"><div>Email: <span class="label-pill">' + utente.email + '</span></div></div>';
+        html += '<div class="outputDiv"><div>Indirizzo: <span class="label-pill">' + utente.indirizzo + ', ' + utente.cap + ' ' + utente.citta + '</span></div></div>';
+        html += '<div class="outputDiv"><div>Pagamento: <span class="label-pill">' + utente.pagamento + '</span></div></div>';
+        html += '<div class="outputDiv"><div>Totale: <span class="label-pill">€ ' + totale.toFixed(2) + '</span></div></div>';
+
+        document.getElementById('dati-ordine').innerHTML = html;
+        document.getElementById('riepilogo-ordine').style.display = 'block';
+
+        carrello = [];
+        document.getElementById('num-carrello').textContent = 0;
+        aggiornaCarrello();
+    }
+
+    function generaPDF() {
+        var jsPDF = window.jspdf.jsPDF;
+        var doc = new jsPDF();
+        var totale = 0;
+        var numOrdine = 'MP-' + Date.now().toString().slice(-6);
+        var data = new Date().toLocaleString('it-IT');
+
+        doc.setFontSize(18);
+        doc.text('MarketPlace - Ricevuta', 20, 20);
+
+        doc.setFontSize(11);
+        doc.text('Ordine: ' + numOrdine, 20, 32);
+        doc.text('Data: ' + data, 20, 39);
+        doc.line(20, 44, 190, 44);
+
+        doc.text('Cliente: ' + utente.nome + ' ' + utente.cognome, 20, 52);
+        doc.text('Email: ' + utente.email, 20, 59);
+        doc.text('Indirizzo: ' + utente.indirizzo + ', ' + utente.cap + ' ' + utente.citta, 20, 66);
+        doc.text('Pagamento: ' + utente.pagamento, 20, 73);
+        doc.line(20, 78, 190, 78);
+
+        doc.setFontSize(13);
+        doc.text('Articoli:', 20, 87);
+        doc.setFontSize(11);
+
+        var y = 95;
+        for (var i = 0; i < carrello.length; i++) {
+            var item = carrello[i];
+            var prezzo = parseFloat(item.prodotto['prezzo']) || 0;
+            totale += prezzo;
+            doc.text((i+1) + '. ' + item.prodotto['nome'] + ' (' + item.prodotto['categoria'] + ')', 20, y);
+            doc.text('EUR ' + prezzo.toFixed(2), 170, y, { align: 'right' });
+            y += 8;
+        }
+
+        doc.line(20, y, 190, y);
+        y += 7;
+        doc.setFontSize(13);
+        doc.text('Totale: EUR ' + totale.toFixed(2), 20, y);
+
+        doc.save('ricevuta_' + numOrdine + '.pdf');
+    }
+
+</script>
+</body>
+</html>
