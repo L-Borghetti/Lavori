@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>MarketPlace</title>
+    <link href="style1.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -206,29 +207,39 @@
         el.style.display = 'block';
         setTimeout(function() { el.style.display = 'none'; }, 3000);
     }
-
+// questo lo ha fatto chat perhè non riuscivo a trovare una soluzione
     function caricaCSV(input) {
-        var file = input.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var righe = e.target.result.trim().split('\n');
-            var intestazione = righe[0].split(',');
-            prodotti = [];
-            for (var i = 1; i < righe.length; i++) {
-                var valori = righe[i].split(',');
-                var obj = {};
-                for (var j = 0; j < intestazione.length; j++) {
-                    obj[intestazione[j].trim()] = (valori[j] || '').trim();
-                }
-                if (obj['nome']) prodotti.push(obj);
-            }
-            mostraMsg('Caricati ' + prodotti.length + ' prodotti!');
-            mostraFiltri();
-            mostraProdotti(prodotti);
-        };
-        reader.readAsText(file, 'UTF-8');
-    }
+    var file = input.files[0];
+    var reader = new FileReader();
 
+    reader.onload = function(e) {
+        var testo = e.target.result.trim();
+
+        var separatore = testo.includes(';') ? ';' : ',';
+
+        var righe = testo.split('\n');
+        var intestazione = righe[0].split(separatore);
+
+        prodotti = [];
+
+        for (var i = 1; i < righe.length; i++) {
+            var valori = righe[i].split(separatore);
+            var obj = {};
+
+            for (var j = 0; j < intestazione.length; j++) {
+                obj[intestazione[j].trim().toLowerCase()] = (valori[j] || '').trim();
+            }
+
+            if (obj['nome']) prodotti.push(obj);
+        }
+
+        mostraMsg('Caricati ' + prodotti.length + ' prodotti!');
+        mostraFiltri();
+        mostraProdotti(prodotti);
+    };
+
+    reader.readAsText(file, 'UTF-8');
+}
     function mostraFiltri() {
         var categorie = [];
         for (var i = 0; i < prodotti.length; i++) {
