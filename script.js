@@ -31,6 +31,5 @@ xhr.onload = function() {
 xhr.onerror = function() {
     console.error("Errore di rete durante la richiesta XMLHttpRequest.");
 };
-r
 xhr.send();
 
