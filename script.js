@@ -1,11 +1,12 @@
-fetch("dati_covid.json")
-    .then(response => response.json())
-    .then(dati => {
-
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "dati_covid.json", true);
+xhr.responseType = "json";
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        const dati = xhr.response;
         const corpo = document.getElementById("corpoTabella");
 
         for (let i = 0; i < dati.length; i++) {
-
             const riga = document.createElement("tr");
 
             riga.innerHTML = `
@@ -22,6 +23,14 @@ fetch("dati_covid.json")
 
             corpo.appendChild(riga);
         }
-    })
+    } else {
+        console.error("Errore nel caricamento dei dati. Codice HTTP:", xhr.status);
+    }
+};
 
+xhr.onerror = function() {
+    console.error("Errore di rete durante la richiesta XMLHttpRequest.");
+};
+r
+xhr.send();
 
