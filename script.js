@@ -9,7 +9,7 @@ xhr.onload = function() {
         for (let i = 0; i < dati.length; i++) {
             const riga = document.createElement("tr");
 
-            riga.innerHTML = `
+            riga.innerHTML = '
                 <td>${dati[i].data}</td>
                 <td>${dati[i].stato}</td>
                 <td>${dati[i].ricoverati_con_sintomi ?? ""}</td>
@@ -19,7 +19,7 @@ xhr.onload = function() {
                 <td>${dati[i].dimessi_guariti ?? ""}</td>
                 <td>${dati[i].deceduti ?? ""}</td>
                 <td>${dati[i].totale_casi ?? ""}</td>
-            `;
+            ';
 
             corpo.appendChild(riga);
         }
