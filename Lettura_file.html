@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Anagrafica Classe XML</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Anagrafica della Classe</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Età</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="corpoTabella">
+        </tbody>
+    </table>
+
+    <script>
+        const xhr = new XMLHttpRequest(); 
+        xhr.open("GET", "classe.xml", true); 
+        xhr.onload = function() {
+            if (xhr.status === 200) { 
+                const xmlDoc = xhr.responseXML;
+                const studenti = xmlDoc.getElementsByTagName("studente");
+                const corpo = document.getElementById("corpoTabella");
+
+                for (let i = 0; i < studenti.length; i++) {
+                    const riga = document.createElement("tr");
+
+                    const nome = studenti[i].getElementsByTagName("nome")[0].textContent;
+                    const cognome = studenti[i].getElementsByTagName("cognome")[0].textContent;
+                    const eta = studenti[i].getElementsByTagName("eta")[0].textContent;
+                    const email = studenti[i].getElementsByTagName("email")[0].textContent;
+
+                    riga.innerHTML = `
+                        <td>${nome}</td>
+                        <td>${cognome}</td>
+                        <td>${eta}</td>
+                        <td>${email}</td>
+                    `;
+
+                    corpo.appendChild(riga);
+                }
+            } else {
+                console.error("Errore nel caricamento del file. Codice HTTP:", xhr.status);
+            }
+        };
+
+        xhr.onerror = function() { 
+            console.error("Errore di rete durante la richiesta HTTP.");
+        };
+
+        xhr.send(); 
+    </script>
+
+</body>
+</html>
