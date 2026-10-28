@@ -38,12 +38,11 @@
                     const eta = studenti[i].getElementsByTagName("eta")[0].textContent;
                     const email = studenti[i].getElementsByTagName("email")[0].textContent;
 
-                    riga.innerHTML = `
-                        <td>${nome}</td>
-                        <td>${cognome}</td>
-                        <td>${eta}</td>
-                        <td>${email}</td>
-                    `;
+                    riga.innerHTML = 
+                        "<td>" + (dati[i].nome || "") + "</td>" +
+                        "<td>" + (dati[i].cognome || "") + "</td>" +
+                        "<td>" + (dati[i].età || "") + "</td>" +
+                        "<td>" + (dati[i].mail || "") + "</td>" +;
 
                     corpo.appendChild(riga);
                 }
