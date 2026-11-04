@@ -23,13 +23,7 @@ xhr.onload = function() {
 
             corpo.appendChild(riga);
         }
-    } else {
-        console.error("Errore nel caricamento dei dati. Codice HTTP:", xhr.status);
     }
-};
-
-xhr.onerror = function() {
-    console.error("Errore di rete durante la richiesta XMLHttpRequest.");
 };
 
 xhr.send();
