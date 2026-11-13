@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercitazione Completa AJAX con XMLHttpRequest</title>
+</head>
+<body>
+
+<div>
+    <h1>Esercitazione: AJAX con XMLHttpRequest</h1>
+
+    <section id="es1">
+        <h2>Esercizio 1: Primo contatto con XMLHttpRequest</h2>
+        <button id="btnEs1">Carica dati.txt</button>
+        <pre id="outputEs1">In attesa dell'azione...</pre>
+    </section>
+
+    <section id="es2">
+        <h2>Esercizio 2: Uso corretto di onload (callback moderna)</h2>
+        <button id="btnEs2">Carica dati con onload</button>
+        <pre id="outputEs2">In attesa dell'azione...</pre>
+    </section>
+
+    <section id="es3">
+        <h2>Esercizio 3: responseText vs responseXML</h2>
+        <button id="btnEs3Json">Carica JSON (responseText)</button>
+        <button id="btnEs3Xml">Carica XML (responseXML)</button>
+        <pre id="outputEs3">In attesa dell'azione...</pre>
+    </section>
+
+    <section id="es4">
+        <h2>Esercizio 4: send() con parametri (POST)</h2>
+        <button id="btnEs4">Invia POST a JSONPlaceholder</button>
+        <pre id="outputEs4">In attesa dell'azione...</pre>
+    </section>
+
+    <section id="progetto">
+        <h2>Progetto Finale: Mini Dashboard Utenti</h2>
+        <div>
+            <input type="text" id="searchInput" placeholder="Cerca utente per nome...">
+            <button id="searchBtn">Cerca</button>
+            <button id="resetBtn">Mostra tutti</button>
+        </div>
+        <div id="statusMessage"></div>
+        <ul id="userList"></ul>
+    </section>
+</div>
+
+<script src="JS.js"></script>
+
+</body>
+</html>
