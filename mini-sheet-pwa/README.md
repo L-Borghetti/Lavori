@@ -1,19 +1,5 @@
 # Mini-Foglio di Calcolo (PWA)
 
-**🔗 Sito pubblicato: https://<username>.github.io/mini-sheet-pwa/**  ← *da sostituire*
-
-## Avvio in locale
-```
-python3 -m http.server 8000   # poi apri http://localhost:8000
-```
-(non da `file://`: il service worker lo richiede)
-
-## Deploy (GitHub Pages)
-1. Crea il repo pubblico `mini-sheet-pwa` e fai push su `main` (file nella root).
-2. Settings → Pages → Source: *Deploy from a branch* → `main` / `(root)`.
-3. Attendi la pubblicazione e apri l'URL in una finestra anonima.
-Percorsi tutti relativi (`./`), `start_url` e `scope` = `"./"`, SW registrato con `./sw.js`.
-
 ## Funzioni implementate
 SOMMA, MEDIA, CONTA, CONTA.VALORI, SOMMA.SE, CONTA.SE, MEDIA.SE, MAX, MIN · operatori + - * / · parentesi · `-` unario ·
 celle singole e intervalli · errori `#DIV/0!`, `#VALORE!`, `#RIF!`, `#NOME?`, `#CIRC!` (riferimento circolare) ·
