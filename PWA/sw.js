@@ -14,7 +14,7 @@ self.addEventListener('activate', e => e.waitUntil((async () => {
 self.addEventListener('fetch', e => {
   const req = e.request; if (req.method !== 'GET') return;
   if (new URL(req.url).origin === location.origin) {       // locale: rete prima, cache se offline
-    e.respondWith(fetch(req).then(res => { const cp = res.clone(); caches.open(V).then(c => c.put(req, cp)); return res; })
+    e.respondWith(fetch(req).then(res => { if (res.ok) { const cp = res.clone(); caches.open(V).then(c => c.put(req, cp)); } return res; })
       .catch(() => caches.match(req, { ignoreSearch: true }).then(h => h || caches.match('./index.html'))));
   } else e.respondWith(caches.match(req).then(h => h || fetch(req)));   // CDN: cache prima
 });

@@ -45,4 +45,24 @@ Cicli rilevati con un insieme di celle "in valutazione".
 Per ottenere 0 usa un intervallo che non la contiene, es. `=SOMMA(A2:CV100)` in E1.
 
 ## Extra / Difficoltà / Riflessioni
-*Da compilare da voi* (domande di riflessione della consegna).
+**Extra:** (da compilare)
+
+**Difficoltà incontrate e come risolte:** (da compilare; es. file scaricati singolarmente senza le cartelle css/ js/ icons/ → 404)
+
+## Domande di riflessione
+1. Quale parte del codice hai scritto tu e quale è stata generata dall'AI? Come hai verificato la correttezza?
+   - *Risposta:* 
+2. Quali prompt sono stati più efficaci? Perché?
+   - *Risposta:* 
+3. Cosa ha fatto l'AI che hai dovuto correggere? Perché?
+   - *Risposta:* 
+4. Quale strategia di virtualizzazione hai scelto e perché? Quali alternative hai valutato?
+   - *Risposta:* 
+5. Come hai gestito le dipendenze tra celle per evitare ricalcoli inutili su 10.000 celle?
+   - *Risposta:* 
+6. Quale piattaforma hai scelto per il deploy e perché? Quali problemi hai incontrato (percorsi, scope del service worker, cache, HTTPS)?
+   - *Risposta:* 
+7. Come hai verificato che la PWA funzioni correttamente dall'URL pubblico e non solo in locale?
+   - *Risposta:* 
+8. Cosa cambieresti se dovessi rifare la prova?
+   - *Risposta:* 
